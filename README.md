@@ -1,3 +1,8 @@
-# drawing_test
+<h1 align="center">Custom Painter Flag</h1>
 
-A new Flutter project.
+<p align="center">Aplicativo demostrando o uso do Custom Painter do Flutter</p>
+
+
+<div align="center">
+  <img align="center" src="screenshot/screenshot.gif" width="200" height="400" />
+</div>
