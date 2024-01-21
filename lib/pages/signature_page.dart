@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:drawing_test/models/draw_line.dart';
+import 'package:drawing_test/widgets/horizontal_line.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -39,46 +40,37 @@ class _SignaturePageState extends State<SignaturePage> {
         alignment: Alignment.center,
         children: [
           _buildCurrentPath(),
-          Positioned(
-            bottom: 100,
-            child: Container(
-              width: MediaQuery.sizeOf(context).width * 0.6,
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(),
-                ),
-              ),
-            ),
-          ),
+          const HorizontalLine(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final nav = Navigator.of(context);
-          final boundary = _renderObjectKey.currentContext?.findRenderObject()
-              as RenderRepaintBoundary?;
-
-          if (boundary != null) {
-            final image = await boundary.toImage(
-              pixelRatio: 3,
-            );
-
-            final byteData =
-                await image.toByteData(format: ImageByteFormat.png);
-
-            if (byteData != null) {
-              final pngBytes = byteData.buffer.asUint8List();
-              final bs64 = base64Encode(pngBytes);
-              debugPrint(bs64.length.toString());
-              nav.pop(pngBytes);
-            }
-          }
-        },
+        onPressed: _saveSignature,
         child: const Icon(
           Icons.save,
         ),
       ),
     );
+  }
+
+  Future<void> _saveSignature() async {
+    final nav = Navigator.of(context);
+    final boundary = _renderObjectKey.currentContext?.findRenderObject()
+        as RenderRepaintBoundary?;
+
+    if (boundary != null) {
+      final image = await boundary.toImage(
+        pixelRatio: 3,
+      );
+
+      final byteData = await image.toByteData(format: ImageByteFormat.png);
+
+      if (byteData != null) {
+        final pngBytes = byteData.buffer.asUint8List();
+        final bs64 = base64Encode(pngBytes);
+        debugPrint(bs64.length.toString());
+        nav.pop(pngBytes);
+      }
+    }
   }
 
   GestureDetector _buildCurrentPath() {
