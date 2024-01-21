@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:drawing_test/models/draw_lines.dart';
+import 'package:drawing_test/models/draw_line.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -99,12 +100,12 @@ class _SignaturePageState extends State<SignaturePage> {
     );
   }
 
-  void _createLine(List<Offset> path) {
-    _lines.add(DrawLine(path: path));
+  void _createLine(List<Offset> point) {
+    _lines.add(DrawLine(points: point));
   }
 
   void _updateLine(Offset point) {
-    _lines.last.path.add(point);
+    _lines.last.points.add(point);
   }
 
   void _onPanStart(DragStartDetails details) {
@@ -139,10 +140,10 @@ class _Drawing extends CustomPainter {
       ..strokeWidth = 2;
 
     for (final line in lines) {
-      for (var i = 0; i < line.path.length - 1; i++) {
-        final point = line.path[i];
+      for (var i = 0; i < line.points.length - 1; i++) {
+        final point = line.points[i];
         if (i > 0) {
-          final previousPoint = line.path[i - 1];
+          final previousPoint = line.points[i - 1];
           canvas.drawLine(previousPoint, point, paint);
         }
       }
