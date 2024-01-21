@@ -1,7 +1,9 @@
-import 'package:drawing_test/home_page.dart';
+import 'package:drawing_test/pages/home_page.dart';
+import 'package:drawing_test/pages/signature_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 
@@ -10,8 +12,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/signature': (context) => const SignaturePage(),
+      },
     );
   }
 }

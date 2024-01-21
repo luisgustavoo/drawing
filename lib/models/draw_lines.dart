@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DrawLines {
-  DrawLines({
+class DrawLine {
+  DrawLine({
     required this.path,
   });
   final List<Offset> path;
