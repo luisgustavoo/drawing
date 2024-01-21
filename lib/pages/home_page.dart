@@ -18,44 +18,41 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                final result = await Navigator.pushNamed(context, '/signature')
-                    as Uint8List?;
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  final result =
+                      await Navigator.pushNamed(context, '/signature')
+                          as Uint8List?;
 
-                if (result != null) {
+                  if (result != null) {
+                    setState(() {
+                      _imageMemory = result;
+                      showSignature = _imageMemory != null;
+                    });
+                  }
+
                   setState(() {
-                    _imageMemory = result;
-                    showSignature = _imageMemory != null;
+                    SystemChrome.setPreferredOrientations([
+                      DeviceOrientation.portraitUp,
+                    ]);
                   });
-                }
-
-                setState(() {
-                  SystemChrome.setPreferredOrientations([
-                    DeviceOrientation.portraitUp,
-                  ]);
-                });
-              },
-              child: const Text('Assinatura'),
+                },
+                child: const Text('Criar assinatura'),
+              ),
             ),
-          ),
-          // const SizedBox(
-          //   height: 20,
-          // ),
-          SizedBox(
-            height: 100,
-            child: Visibility(
+            Visibility(
               visible: showSignature,
               child: showSignature
                   ? InteractiveViewer(child: Image.memory(_imageMemory!))
                   : const SizedBox.shrink(),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

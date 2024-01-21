@@ -41,9 +41,7 @@ class _SignaturePageState extends State<SignaturePage> {
           Positioned(
             bottom: 100,
             child: Container(
-              // height: thickness,
               width: MediaQuery.sizeOf(context).width * 0.6,
-              // margin: EdgeInsetsDirectional.only(start: indent, end: endIndent),
               decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(),
@@ -86,7 +84,7 @@ class _SignaturePageState extends State<SignaturePage> {
     return GestureDetector(
       onPanStart: _onPanStart,
       onPanUpdate: _onPanUpdate,
-      onPanEnd: _onPanEnd,
+      // onPanEnd: _onPanEnd,
       child: RepaintBoundary(
         key: _renderObjectKey,
         child: Container(
@@ -121,11 +119,11 @@ class _SignaturePageState extends State<SignaturePage> {
     });
   }
 
-  void _onPanEnd(DragEndDetails details) {
-    setState(() {
-      _updateLine(_lines.last.path.last);
-    });
-  }
+  // void _onPanEnd(DragEndDetails details) {
+  //   setState(() {
+  //     _updateLine(_lines.last.path.last);
+  //   });
+  // }
 }
 
 class _Drawing extends CustomPainter {
