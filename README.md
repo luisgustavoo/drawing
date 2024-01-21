@@ -1,6 +1,6 @@
-<h1 align="center">Custom Painter Flag</h1>
+<h1 align="center">CustomPaint Signature</h1>
 
-<p align="center">Aplicativo demostrando o uso do Custom Painter do Flutter</p>
+<p align="center">Aplicativo demostrando como criar uma assinatura com CustomPaint</p>
 
 
 <div align="center">
