@@ -77,7 +77,6 @@ class _SignaturePageState extends State<SignaturePage> {
     return GestureDetector(
       onPanStart: _onPanStart,
       onPanUpdate: _onPanUpdate,
-      // onPanEnd: _onPanEnd,
       child: RepaintBoundary(
         key: _renderObjectKey,
         child: Container(
@@ -85,7 +84,7 @@ class _SignaturePageState extends State<SignaturePage> {
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: CustomPaint(
-            painter: _Drawing(_lines),
+            painter: _Signature(_lines),
           ),
         ),
       ),
@@ -111,16 +110,10 @@ class _SignaturePageState extends State<SignaturePage> {
       _updateLine(details.localPosition);
     });
   }
-
-  // void _onPanEnd(DragEndDetails details) {
-  //   setState(() {
-  //     _updateLine(_lines.last.path.last);
-  //   });
-  // }
 }
 
-class _Drawing extends CustomPainter {
-  _Drawing(this.lines);
+class _Signature extends CustomPainter {
+  _Signature(this.lines);
 
   final List<DrawLine> lines;
 
