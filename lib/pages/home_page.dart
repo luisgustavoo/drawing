@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Uint8List? _imageMemory;
-  bool showSignature = false;
+  bool _showSignature = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                   if (result != null) {
                     setState(() {
                       _imageMemory = result;
-                      showSignature = _imageMemory != null;
+                      _showSignature = _imageMemory != null;
                     });
                   }
 
@@ -46,8 +46,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Visibility(
-              visible: showSignature,
-              child: showSignature
+              visible: _showSignature,
+              child: _showSignature
                   ? InteractiveViewer(child: Image.memory(_imageMemory!))
                   : const SizedBox.shrink(),
             ),
